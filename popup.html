@@ -2,22 +2,78 @@
 <html>
 
 	<head>
-		<title>Oopa</title>
+		
 		<script src="./js/jquery-1.7.1.min.js" type="text/javascript" ></script>
 		
 		<script type="text/javascript" language="javascript" charset="utf-8">
+			//var db = openDatabase("xNotesDb", "0.0.1");
 			
-			localStorage["compromisso"] = "oopa";
+			//localStorage["compromisso"] = [];
 			
 			
 			
-			$("#addCompromissoForm").submit(function(){
+			
+			window.localStorage["prioridadeList"] = ['urgente','alta','normal','baixa'];
+			
+			/*var compromissos = [];
+			
+			if(window.localStorage.compromissos.length > 0){
+				//alert("localStorage não está zerado: "+window.localStorage.compromissos.length);
+				//alert(window.localStorage.compromissos);
+				compromissos = window.localStorage.compromissos
+			} */
+			
+			$(document).ready(function(){
+				mountCompromissos();
+				$("#addCompromissoForm").submit(function(){
 
-				//localStorage["compromisso"] = $('#compromisso').text();				
-				alert(localStorage.compromisso);				
+					//			
+					//save($('#compromisso').val());		
+					$("#compromissosList").append("<li>"+$("#compromisso").val()+"</li>");
+					
+					if(localStorage.setItem('compromissos') != 'undefined'){
+						
+						window.localStorage.setItem('compromissos', $("#compromissosList").html());
+					}		
+					
+					return false;
+				});
+				
+				
 			});
-
+			
+			function mountCompromissos(){
+				//if(window.localStorage.getItem('compromissosList')){
+					
+					$("#compromissosList").html(localStorage.getItem('compromissos'));
+				//}
+			}
+			
+			function save(task){
+				
+				console.log(" compromisso"+compromissos);
+				
+				
+				//console.log('compromisso: '+ compromissos);
+				//localStorage['compromissos'];
+				
+				try{
+					compromissos.push(task);
+					
+					//localStorage.removeItem("compromissos"); .join(';')
+					//localStorage.setItem("compromissos", compromissos);
+					window.localStorage.compromissos = compromissos
+					alert("localStorage: "+window.localStorage.compromissos);
+				}catch(e){
+					console.log('exception: '+e);
+					alert(e);
+				}
+				return false;
+			}
+			
 		</script>
+		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<title>Oopa</title>
 	</head>
 	
 	<body>
@@ -26,9 +82,14 @@
 		
 		<form id="addCompromissoForm" name="" action="#" method="post">
 		
-			<input type="text" name="compromisso" value="" />
+			<input type="text" name="compromisso" id="compromisso" value="" />
 			<input type="submit" value="add">
 		</form>
-
+		<h2>Compromissos</h2>
+		<ul id="compromissosList">		
+<!--			<li class="to-do" >Compromisso 1</li>-->
+<!--			<li class="doing">Compromisso 2</li>-->
+<!--			<li class="done">Compromisso 3</li>-->
+		</ul>
 	</body>
 </html>
