@@ -1,95 +1,50 @@
-
-<html>
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html> 
 	<head>
 		
 		<script src="./js/jquery-1.7.1.min.js" type="text/javascript" ></script>
-		
-		<script type="text/javascript" language="javascript" charset="utf-8">
-			//var db = openDatabase("xNotesDb", "0.0.1");
-			
-			//localStorage["compromisso"] = [];
-			
-			
-			
-			
-			window.localStorage["prioridadeList"] = ['urgente','alta','normal','baixa'];
-			
-			/*var compromissos = [];
-			
-			if(window.localStorage.compromissos.length > 0){
-				//alert("localStorage não está zerado: "+window.localStorage.compromissos.length);
-				//alert(window.localStorage.compromissos);
-				compromissos = window.localStorage.compromissos
-			} */
-			
+		<script src="./xNotes.js" type="text/javascript" ></script>
+		<script type="text/javascript" language="javascript" charset="utf-8"> 
 			$(document).ready(function(){
-				mountCompromissos();
+				initComponents();
+				
 				$("#addCompromissoForm").submit(function(){
 
-					//			
-					//save($('#compromisso').val());		
-					$("#compromissosList").append("<li>"+$("#compromisso").val()+"</li>");
-					
-					if(localStorage.setItem('compromissos') != 'undefined'){
+					if($('#compromisso').val() != ""){
+							
+						addNote($("#compromisso").val());
+					}else{
 						
-						window.localStorage.setItem('compromissos', $("#compromissosList").html());
-					}		
+						alert('preencha!')	;
+					} 
 					
 					return false;
-				});
-				
-				
-			});
-			
-			function mountCompromissos(){
-				//if(window.localStorage.getItem('compromissosList')){
-					
-					$("#compromissosList").html(localStorage.getItem('compromissos'));
-				//}
-			}
-			
-			function save(task){
-				
-				console.log(" compromisso"+compromissos);
-				
-				
-				//console.log('compromisso: '+ compromissos);
-				//localStorage['compromissos'];
-				
-				try{
-					compromissos.push(task);
-					
-					//localStorage.removeItem("compromissos"); .join(';')
-					//localStorage.setItem("compromissos", compromissos);
-					window.localStorage.compromissos = compromissos
-					alert("localStorage: "+window.localStorage.compromissos);
-				}catch(e){
-					console.log('exception: '+e);
-					alert(e);
-				}
-				return false;
-			}
-			
+				}); 	
+			}); 
 		</script>
-		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" title="no title" charset="utf-8" />
-		<title>Oopa</title>
+		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8" />
+		<title>xNotes</title>
 	</head>
 	
 	<body>
 		<h1>Add nova tarefa / compromisso</h1>
 		<p>Terminar essa Extension</p>
 		
-		<form id="addCompromissoForm" name="" action="#" method="post">
 		
-			<input type="text" name="compromisso" id="compromisso" value="" />
+		<form id="addCompromissoForm" name="" action="#" method="post">
+			
+			<div>
+				<input type="text" name="compromisso" id="compromisso" value="" />
+			</div>
+			<div>
+				<select name="priority" id="priority"> </select>
+			</div>
 			<input type="submit" value="add">
 		</form>
 		<h2>Compromissos</h2>
 		<ul id="compromissosList">		
-<!--			<li class="to-do" >Compromisso 1</li>-->
-<!--			<li class="doing">Compromisso 2</li>-->
-<!--			<li class="done">Compromisso 3</li>-->
+			
 		</ul>
 	</body>
 </html>
