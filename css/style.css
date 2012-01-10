@@ -1,4 +1,4 @@
-body{width:350px; margin:0; padding:0; font-family:sans-serif;}
+body{width:350px; margin:0; padding:10px; font-family:sans-serif;}
 
 h1{font-weight:normal; color:#999;}
 form{padding:0; margin:0; display: block;}
@@ -9,21 +9,39 @@ input[type="text"]{
 border-radius: 5px;
 }
 input[type="text"]:focus{ outline:none;}
-input[type='submit']{
+input[type='submit'], input[type='reset']{
 	border:none; background-color:#999; color:#fff;
 	padding:10px 20px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	cursor:pointer;
+}
+input[type='submit']:hover, input[type='reset']:hover{
+	background-color:#ccc;
 }
 ul{padding:0; margin:0;}
-ul li{padding: 5px 0 5px 20px; cursor:pointer; font-size:12px; margin-bottom:2px;
-background: url(../img/note.png) 2px 7px no-repeat;}
+ul li{padding: 5px 0 5px 20px; cursor:pointer; font-size:12px;
+background: url(../img/note.png) 2px 7px no-repeat;
+border-bottom:dashed 1px #6aa8f8;  padding-bottom:10px;
+}
 
 
 li.to-do{ color:#394000; background-color:#eefe63; }
 li.to-do:hover{background-color:#f2fe85}
 li.doing{ color:#79b961; background-color:#90e383;  }
 li.done{ color:#576d99; text-decoration: line-through;}
+
 li span.priority{font-size:10px; color:#c00;}
+li span.priority.baixa{color:#;}
+li span.priority.alta{color:#;}
+li span.priority.urgente{color:#;}
+li span.priority.normal{color:#;}
+
+#wrapper-top ul{padding:0; margin:0; text-align:right;}
+#wrapper-top ul li{display:inline; font-size:13px; border:none; }
+#wrapper-top ul li a{text-decoration:none; color:#c00;}
+#wrapper-top ul li a:hover{text-decoration:underline;}
+
+
 

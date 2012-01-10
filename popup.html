@@ -2,41 +2,55 @@
 	"http://www.w3.org/TR/html4/strict.dtd">
 <html> 
 	<head>
-		
+		<link rel="stylesheet" href="./js/jquery-ui-1.8.16.custom/css/pepper-grinder/jquery-ui-1.8.16.custom.css" type="text/css" media="screen" title="no title" charset="utf-8" />		
+	
 		<script src="./js/jquery-1.7.1.min.js" type="text/javascript" ></script>
+		<script src="./js/jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript" ></script>
 		<script src="./xNotes.js" type="text/javascript" ></script>
 		<script type="text/javascript" language="javascript" charset="utf-8"> 
 			$(function(){
+			
 				initComponents();
-				
+			
 				$("#addCompromissoForm").submit(function(){
 
 					if($('#compromisso').val() != ""){
-							
-						addNote($("#compromisso").val());
-					}else{
+						var map = new Object();
 						
-						alert('preencha!')	;
+						map.titulo = $("#compromisso").val();
+						map.data = $("#data").val();
+						
+						addNote(map);
+					}else{
+						alert('preencha!');
 					} 
 					
 					return false;
 				}); 
 				
 				$("#compromissosList li").click(function (){
+					
 					var listItem = $(this);
+					
 					index = $('li').index(listItem);
+
+					alert(index);
+					
 					if($('#compromissosList li:eq('+index+') div').is(':hidden')){
 						
-						$('#compromissosList li:eq('+index+') div').slideDown();
-					}else{
+						$('#compromissosList li:eq('+index+') div').fadeIn();
 						
-						$('#compromissosList li:eq('+index+') div').slideUp();
+						$('#compromissosList li:eq('+index+') div input[type="reset"]').click(function(){
+							$('#compromissosList li:eq('+index+') div').fadeOut();
+						});
 					}
 					
 					//$(listItem).prepend(tag).fadeIn();
 					//alert('Index: ' + ;
 					
 				});
+				
+				$("#data").datepicker({ autoSize: true });
 			}); 
 		</script>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8" />
@@ -44,18 +58,25 @@
 	</head>
 	
 	<body>
+		<div id="wrapper-top">
+			<ul>
+				<li><a href="javascript:removeAll();">limpar tarefas</a></li>
+				<li style="background:none; padding:0;"> | </li>
+				<li><a href="#">configuracoes</a></li>
+			</ul>
+		</div>
 		<h1>Add nova tarefa / compromisso</h1>
-		<p>Terminar essa Extension</p>
-		
 		
 		<form id="addCompromissoForm" name="" action="#" method="post">
 			
 			<div>
 				<input type="text" name="compromisso" id="compromisso" value="" />
+				<input type="text" name="data" id="data" />
 			</div>
 			<div>
 				<select name="priority" id="priority"> </select>
 			</div>
+			
 			<input type="submit" value="add">
 		</form>
 		<h2>Compromissos</h2>

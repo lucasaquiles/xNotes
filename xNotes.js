@@ -1,6 +1,5 @@
 window.localStorage["prioridadeList"] = new Array('normal','baixa','urgente','alta');
 
-
 function initComponents(){
 	
 	mountSelectPrioridades();
@@ -8,8 +7,8 @@ function initComponents(){
 }
 
 function mountCompromissos(){
-		
-	$("#compromissosList").html(localStorage.getItem('compromissos'));
+	
+	$("#compromissosList").html(localStorage.getItem('compromissos'));	
 }
 
 function mountSelectPrioridades(){
@@ -23,27 +22,50 @@ function mountSelectPrioridades(){
 	}
 }
 
+function removeAll(){
+	if(confirm("tem certeza que deseja apagar todas as tarefas/compromissos?")){
+		window.localStorage.compromissos = [];
+		location.reload(true);
+	}
+}
+
 function addNote(task){
 	
 	if(localStorage.setItem('compromissos') != 'undefined'){
-	
 		
+		$divElement = $("<div></div>");
+		$divElement.attr({style:"display:none"});
 		
-		div = "<div style='display:none;'>"+
-				"<form>"+
-					"<div><input type='radio' id='status' name='status' value='to-do'> to do</div>"+
-					"<div><input type='radio' id='status' name='status' value='doing'> doing</div>"+
-					"<div><input type='radio' id='status'name='status' value='done'> done</div>"+
-					"<div><input type='submit' value='ok'>"+
-				"</form>"+
-			"</div>";
-	
+		$formElement = $("<form></form>");
+		$formElement.attr({name:'formStatus', id:'formStatus', action:'#'});
+		
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'to-do'}).append('to-do'));
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'doing'}).append('doing'));
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'done'}).append('done'));
+
+		$div = $("<div></div>");
+		
+		$div.append($('<input />').attr({name:'edit',id:'edit',type:'submit', value:'Ok'})).append($('<input />').attr({name:'cancel',id:'cancel',type:'reset', value:'Cancelar'}));
+		$formElement.append($div);
+		
+		$divElement.append($formElement);
+
 		priority = $('select#priority option:selected').text();
-		tag = "<li class='to-do'>"+task+" - <span class='priority'>"+priority+"</span>"+div+"</li>";
 		
-		$("#compromissosList").append(tag);
+		$spanElement = $("<span></span>").addClass('priority');
+		$spanElement.append(" - "+priority);
+		$spanElement.append($divElement);
+		
+		$liElement = $("<li></li>").attr({class:'to-do'}).append(task.titulo).append(" - "+task.data).append($spanElement);
+
+		$("#compromissosList").append($liElement);
+		
 		window.localStorage.setItem('compromissos', $("#compromissosList").html());
 	}
-	
+
+	location.reload(true);
+
 	return false;
 }
+
+
