@@ -6,7 +6,7 @@
 		<script src="./js/jquery-1.7.1.min.js" type="text/javascript" ></script>
 		<script src="./xNotes.js" type="text/javascript" ></script>
 		<script type="text/javascript" language="javascript" charset="utf-8"> 
-			$(document).ready(function(){
+			$(function(){
 				initComponents();
 				
 				$("#addCompromissoForm").submit(function(){
@@ -20,7 +20,23 @@
 					} 
 					
 					return false;
-				}); 	
+				}); 
+				
+				$("#compromissosList li").click(function (){
+					var listItem = $(this);
+					index = $('li').index(listItem);
+					if($('#compromissosList li:eq('+index+') div').is(':hidden')){
+						
+						$('#compromissosList li:eq('+index+') div').slideDown();
+					}else{
+						
+						$('#compromissosList li:eq('+index+') div').slideUp();
+					}
+					
+					//$(listItem).prepend(tag).fadeIn();
+					//alert('Index: ' + ;
+					
+				});
 			}); 
 		</script>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8" />

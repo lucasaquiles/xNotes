@@ -1,4 +1,4 @@
-body{margin:0; padding:0; font-family:sans-serif;}
+body{width:350px; margin:0; padding:0; font-family:sans-serif;}
 
 h1{font-weight:normal; color:#999;}
 form{padding:0; margin:0; display: block;}
@@ -17,11 +17,13 @@ input[type='submit']{
 	border-radius: 5px;
 }
 ul{padding:0; margin:0;}
-ul li{padding: 5px 0 5px 20px;
+ul li{padding: 5px 0 5px 20px; cursor:pointer; font-size:12px; margin-bottom:2px;
 background: url(../img/note.png) 2px 7px no-repeat;}
 
-li.to-do{ color:#d2a921; background-color:#f2e1ab; }
-li.doing{ color:#79b961; background-color:#c9e3bf;  }
+
+li.to-do{ color:#394000; background-color:#eefe63; }
+li.to-do:hover{background-color:#f2fe85}
+li.doing{ color:#79b961; background-color:#90e383;  }
 li.done{ color:#576d99; text-decoration: line-through;}
 li span.priority{font-size:10px; color:#c00;}
 
