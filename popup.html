@@ -11,46 +11,86 @@
 			$(function(){
 			
 				initComponents();
-			
-				$("#addCompromissoForm").submit(function(){
-
-					if($('#compromisso').val() != ""){
-						var map = new Object();
-						
-						map.titulo = $("#compromisso").val();
-						map.data = $("#data").val();
-						
-						addNote(map);
-					}else{
-						alert('preencha!');
-					} 
+				
+				var compromissoTitulo = $("#compromisso").val();
+				var data = $("#data").val();
+				var descricao = $("#descricao").val();
+				
+				
+				$("#compromissosList li").children("a.remove").click(function(){
+				
+					console.log("clicando direto");
+					console.log("parent: "+$(this).parent("li"));
 					
-					return false;
-				}); 
+					$parentLi = $(this).parent("li");
+					$parentLi.remove();
+					
+					removeTask();
+					console.log("removeu item");
+				});
 				
 				$("#compromissosList li").click(function (){
 					
-					var listItem = $(this);
+					console.log($(this).has("div.container"));
+					console.log($(this).children("div.container"));
 					
-					index = $('li').index(listItem);
-
-					alert(index);
-					
-					if($('#compromissosList li:eq('+index+') div').is(':hidden')){
+					if($(this).children("div.container").is(":hidden")){
+						console.log("remove: "+$(this).children("a.remove"));
+						$removeButton = $(this).children("a.remove");
 						
-						$('#compromissosList li:eq('+index+') div').fadeIn();
+						$(this).children("div.container").slideDown();
 						
-						$('#compromissosList li:eq('+index+') div input[type="reset"]').click(function(){
-							$('#compromissosList li:eq('+index+') div').fadeOut();
-						});
-					}
+		
+					}else{
+						console.log("não tá escondida");
+					}				
 					
 					//$(listItem).prepend(tag).fadeIn();
 					//alert('Index: ' + ;
 					
 				});
+
+				$("#data").datepicker({ autoSize: true,currentText: 'Hoje'}, $.datepicker.regional['pt-BR']);
 				
-				$("#data").datepicker({ autoSize: true });
+				$( "#dialog-form" ).dialog({
+					autoOpen: false,
+					height: 320,
+					width: 430,
+					modal: true,
+					buttons: {
+
+					"add": function() {
+						var bValid = true;
+					
+						if ( bValid ) {
+					
+							var map = new Object();
+						
+							map.titulo = $("#compromisso").val();
+							map.descricao = $("#descricao").val();
+							map.data = $("#data").val();
+						
+							addNote(map);
+						
+							$( this ).dialog( "close" );
+						}
+					},
+					"cancelar": 
+						function() {
+							$( this ).dialog( "close" );
+						}
+			},
+			close: function() {
+//				allFields.val( "" ).removeClass( "ui-state-error" );
+			}
+			});
+
+			$( "#create-task" ).button().click(function() {
+				$( "#dialog-form" ).dialog( "open" );
+			});
+				
+				
+				
 			}); 
 		</script>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8" />
@@ -65,20 +105,27 @@
 				<li><a href="#">configuracoes</a></li>
 			</ul>
 		</div>
-		<h1>Add nova tarefa / compromisso</h1>
 		
-		<form id="addCompromissoForm" name="" action="#" method="post">
+		<h1>Add nova tarefa</h1>
+		
+		<div id="dialog-form" title="criar nova tarefa / compromisso">
+			<form id="addCompromissoForm" name="" action="#" method="post">
 			
-			<div>
-				<input type="text" name="compromisso" id="compromisso" value="" />
-				<input type="text" name="data" id="data" />
-			</div>
-			<div>
-				<select name="priority" id="priority"> </select>
-			</div>
-			
-			<input type="submit" value="add">
-		</form>
+				<div>
+					<input type="text" name="compromisso" id="compromisso" value="" />
+					<input type="text" name="data" id="data" />
+				</div>
+				<div>
+					<textarea name="descricao" id="descricao" cols="34" rows="3"></textarea>
+				</div>
+				<div>
+					<select name="priority" id="priority"> </select>
+				</div>
+			</form>
+		</div>
+		
+		<button id="create-task">criar nova tarefa</button>
+		
 		<h2>Compromissos</h2>
 		<ul id="compromissosList">		
 			

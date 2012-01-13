@@ -1,0 +1,22 @@
+issues
+
+1 - formulário de tarefas / compromisso
+	- validar entradas do formulário
+	- edição de tarefas, ao clicar em um item da lista deve-se exibir um formulário para editar o andamento da tarefa e exibir um indicador percentual de desenvolvimento daquela tarefa.
+	
+	
+2 - pop up de configurações
+
+	- notificações
+	- gerenciar tarefas (excluir todas)
+	- idioma
+	
+3 - Pop up de estatisticas
+
+4 - refatoração
+	
+	- externalizar arquivos .js do popup.html
+	- refatorar método add(task); de xNotes.js
+	- refatorar folha de estilo
+	- refatorar manifest.json
+
