@@ -45,9 +45,6 @@
 						console.log("não tá escondida");
 					}				
 					
-					//$(listItem).prepend(tag).fadeIn();
-					//alert('Index: ' + ;
-					
 				});
 
 				$("#data").datepicker({ autoSize: true,currentText: 'Hoje'}, $.datepicker.regional['pt-BR']);
@@ -75,14 +72,13 @@
 							$( this ).dialog( "close" );
 						}
 					},
-					"cancelar": 
-						function() {
+					"cancelar": function() {
 							$( this ).dialog( "close" );
 						}
-			},
-			close: function() {
-//				allFields.val( "" ).removeClass( "ui-state-error" );
-			}
+					},
+					close: function() {
+		//				allFields.val( "" ).removeClass( "ui-state-error" );
+					}
 			});
 
 			$( "#create-task" ).button().click(function() {

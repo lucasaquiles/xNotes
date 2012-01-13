@@ -30,6 +30,11 @@ function removeAll(){
 	}
 }
 
+function updateTaskStatus(newStatus){
+	
+	
+}
+
 function addNote(task){
 	
 	if(localStorage.setItem('compromissos') != 'undefined'){
@@ -41,9 +46,9 @@ function addNote(task){
 		$formElement = $("<form></form>");
 		$formElement.attr({name:'formStatus', id:'formStatus', action:'#'});
 		
-		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'to-do'}).append('to-do'));
-		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'doing'}).append('doing'));
-		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'done'}).append('done'));
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'to-do'}).after('to-do'));
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'doing'}).after('doing'));
+		$formElement.append($('<input />').attr({name:'status',id:'status',type:'radio', value:'done'}).after('done'));
 
 		$div = $("<div></div>");
 		
