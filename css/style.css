@@ -44,7 +44,7 @@ ul li{
 
 li.to-do{ color:#394000; background-color:#eefe63; }
 li.to-do:hover{background-color:#f2fe85}
-li.doing{ color:#79b961; background-color:#90e383;  }
+li.doing{ color:#79b961; background-color:#90e383;color:#fff !important;  }
 li.done{ color:#576d99; text-decoration: line-through;}
 
 li span.priority{font-size:10px; color:#c00;}

@@ -8,6 +8,7 @@
 		<script src="./js/jquery-ui-1.8.16.custom/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript" ></script>
 		<script src="./xNotes.js" type="text/javascript" ></script>
 		<script type="text/javascript" language="javascript" charset="utf-8"> 
+			var $r
 			$(function(){
 			
 				initComponents();
@@ -29,21 +30,55 @@
 					console.log("removeu item");
 				});
 				
-				$("#compromissosList li").click(function (){
+				$item = $("#compromissosList li").click(function (){
+					
+					console.log($(this).html());
+					
+					$li = $(this);
+					
+					if($item.hasClass('selectedItem')){
+						
+						$item.removeClass('selectedItem').addClass('unselected');
+					}
+	
+					$(this).addClass("selectedItem").removeClass('unselected');					
+					
 					
 					console.log($(this).has("div.container"));
 					console.log($(this).children("div.container"));
 					
-					if($(this).children("div.container").is(":hidden")){
+					if($('li.selectedItem').children("div.container").is(":hidden")){
+					
 						console.log("remove: "+$(this).children("a.remove"));
 						$removeButton = $(this).children("a.remove");
 						
-						$(this).children("div.container").slideDown();
+						$container = $(this).children("div.container");
+						$container.slideDown();
 						
-		
+						$inputRadio = $(this).children("div.container").children("form").children("input:radio");
+							
+						className = $li.attr("class").split(" ");
+						//console.log("selecionado: "+$inputRadio);
+						$inputRadio.click(function(){
+							console.log("selecionou: "+$(this).val());
+							
+							console.log("removeu: "+$("li.selectedItem").removeClass(className[0]));
+							console.log("atualizou: "+$("li.selectedItem").addClass($(this).val()).removeClass("selectedItem"));
+							
+							$item.removeClass('selectedItem').addClass('unselected');
+								
+							$container.slideUp();
+							//updateTaskStatus();
+						});		
+
+						//return $(this);
 					}else{
+						$item.children("div.container").slideUp();
+						$item.removeClass('selectedItem').addClass('unselected');
+						
 						console.log("não tá escondida");
-					}				
+						//updateTaskStatus();
+					}		
 					
 				});
 

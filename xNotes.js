@@ -24,15 +24,16 @@ function mountSelectPrioridades(){
 }
 
 function removeAll(){
-	if(confirm("tem certeza que deseja apagar todas as tarefas/compromissos?")){
+	//if(confirm("tem certeza que deseja apagar todas as tarefas/compromissos?")){
 		window.localStorage.compromissos = [];
 		location.reload(true);
-	}
+	//}
 }
 
 function updateTaskStatus(newStatus){
 	
-	
+	window.localStorage.setItem('compromissos', $("#compromissosList").html());
+	location.reload(true);
 }
 
 function addNote(task){
