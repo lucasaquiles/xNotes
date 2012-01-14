@@ -49,6 +49,7 @@
 					
 					if($('li.selectedItem').children("div.container").is(":hidden")){
 					
+						updated  = false;
 						console.log("remove: "+$(this).children("a.remove"));
 						$removeButton = $(this).children("a.remove");
 						
@@ -66,19 +67,30 @@
 							console.log("atualizou: "+$("li.selectedItem").addClass($(this).val()).removeClass("selectedItem"));
 							
 							$item.removeClass('selectedItem').addClass('unselected');
+							
+							
+							$container.slideUp(function(){
 								
-							$container.slideUp();
-							//updateTaskStatus();
+								updateTaskStatus();
+							});
+							
+							return false;
 						});		
-
+						
+						
 						//return $(this);
+						
 					}else{
 						$item.children("div.container").slideUp();
 						$item.removeClass('selectedItem').addClass('unselected');
 						
 						console.log("não tá escondida");
-						//updateTaskStatus();
+
+						return false;
 					}		
+					
+					
+					
 					
 				});
 
