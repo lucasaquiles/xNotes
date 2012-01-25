@@ -4,12 +4,24 @@ function initComponents(){
 	
 	mountSelectPrioridades();
 	mountCompromissos();
+	
 }
 
 function mountCompromissos(){
 	
 	$("#compromissosList").html(localStorage.getItem('compromissos'));	
 }
+
+function loadNotifications(){
+
+	
+	 if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
+	    // function defined in step 2
+	    createNotificationInstance({ notificationType: 'html' });
+	  } else {
+	    window.webkitNotifications.requestPermission();
+	  }
+	}
 
 function mountSelectPrioridades(){
 	
@@ -34,6 +46,18 @@ function updateTaskStatus(newStatus){
 	
 	window.localStorage.setItem('compromissos', $("#compromissosList").html());
 	location.reload(true);
+}
+
+
+
+function createNotificationInstance() {
+  var notification = webkitNotifications.createNotification(
+  'icon.png',  // icon url - can be relative
+  'Hello!',  // notification title
+  'Lorem ipsum...'  // notification body text
+	);
+	
+	notification.show();
 }
 
 function addNote(task){

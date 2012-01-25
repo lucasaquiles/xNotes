@@ -132,9 +132,31 @@
 				$( "#dialog-form" ).dialog( "open" );
 			});
 				
+<!--				 chrome.windows.getCurrent(function(currentWindow) {-->
+<!--    					currentWindowId = currentWindow.id;-->
+<!--    					-->
+<!--    					$("#wrapper-top").append(currentWindow+"opa");-->
+<!--    					-->
+<!--    					chrome.windows.get(currentWindowId, function (w){-->
+<!--    					-->
+<!--    						if(w.focused){-->
+<!--	    						$("#wrapper-top").append("<br >"+w.focused+"2");-->
+<!--							loadNotifications();    						-->
+<!--    						}-->
+
+<!--    						-->
+<!--    					});-->
+<!--   				 });-->
+
+
+				chrome.tabs.onCreated.addListener(function(window) {
 				
+					$("#wrapper-top").append("---"+window);
+					loadNotifications(); 
+				});
 				
 			}); 
+
 		</script>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen" charset="utf-8" />
 		<title>xNotes</title>
@@ -146,6 +168,7 @@
 				<li><a href="javascript:removeAll();">limpar tarefas</a></li>
 				<li style="background:none; padding:0;"> | </li>
 				<li><a href="#">configuracoes</a></li>
+				
 			</ul>
 		</div>
 		

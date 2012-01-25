@@ -12,5 +12,5 @@
 	"default_title": "xNotes"   
 },
 
-"permissions": ["management","notifications"]
+"permissions": ["management","notifications","contextMenus","tabs","debugger"]
 }
